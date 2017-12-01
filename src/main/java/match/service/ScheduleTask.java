@@ -68,7 +68,8 @@ public class ScheduleTask {
     }
     @Scheduled(cron = "0/10 * * * * ? ")
     public void match() throws Exception {
-        if(ScheduleTask.matchOn.get()){
+        if(!ScheduleTask.matchOn.get()){
+            System.out.println("The match is off.");
             return;
         }
         MatchPoolExample matchPoolExample = new MatchPoolExample();

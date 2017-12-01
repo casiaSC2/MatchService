@@ -19,15 +19,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class MatchController {
     private Logger logger = LoggerFactory.getLogger(MatchController.class);
     @RequestMapping(value = "/control/on_off_switch", method = RequestMethod.GET)
-    @ResponseBody
-    public BaseResponse matchOnOff(){
+    public String matchOnOff(){
         try {
             boolean isOn = ScheduleTask.matchOn.get();
             ScheduleTask.matchOn.compareAndSet(isOn, !isOn);
-            return new SuccessJson();
+            if (isOn){
+                return "The match is off now.";
+            }else{
+                return "The match is on now.";
+            }
         }catch (Exception e){
             logger.error("match switch error", e);
-            return new ErrorJson(1, "match switch error");
+            return "match switch error";
         }
     }
 
