@@ -32,7 +32,7 @@ public class ScheduleTask {
     /**
      * if the match is started
      */
-    public static AtomicBoolean matchOn = new AtomicBoolean(false);
+    public static AtomicBoolean matchOn = new AtomicBoolean(true);
 
     @Resource
     private MatchPoolMapper matchPoolMapper;
@@ -107,7 +107,7 @@ public class ScheduleTask {
         matchResult.setUsernameA(usernameA);
         matchResult.setUsernameB(usernameB);
         matchResult.setWin(matchResultInt);
-        matchResultMapper.insertSelective(matchResult);
+        matchResultMapper.insert(matchResult);
 
         updateStatistical(usernameA, matchResultInt);
         updateStatistical(usernameB, -matchResultInt);
